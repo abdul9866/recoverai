@@ -51,7 +51,7 @@ torch.manual_seed(RANDOM_SEED)
 
 OUTPUTS_DIR  = Path("./recoverai/outputs")
 CHROMA_DIR   = Path("/mnt/c/Users/ABDUL RAHAMTULLA/.gemini/antigravity/scratch/recoverai/chroma_data")
-BASE_DIR     = Path("/tmp/recoverai_v21")
+BASE_DIR     = Path("/var/tmp/recoverai_v21")
 CORPUS_DIR   = BASE_DIR / "corpus"
 DISK_DIR     = BASE_DIR / "disks"
 CARVED_DIR   = BASE_DIR / "carved"
@@ -77,6 +77,7 @@ for fs_name, mkfs_cmd in [("vfat","mkfs.vfat -F 32"), ("ext4","mkfs.ext4 -F")]:
     img = BASE_DIR / f"pf_{fs_name}.img"
     mnt = BASE_DIR / f"pf_mnt_{fs_name}"
     mnt.mkdir(exist_ok=True)
+    subprocess.run(["umount", "-f", str(mnt)], capture_output=True)
     ok = False
     try:
         subprocess.run(["truncate", "-s", "32M", str(img)], check=True, capture_output=True)
