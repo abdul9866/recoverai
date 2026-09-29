@@ -1,0 +1,4 @@
+timestamp,user,action
+10:00,admin,login
+10:05,attacker,download_db
+10:12,attacker,delete_logs
