@@ -143,14 +143,16 @@ def train_oof(X: np.ndarray, y_cls: np.ndarray, y_reg: np.ndarray,
     if len(unique_classes) < 2:
         print("[PyTorch] WARNING: Single class present — skipping OOF, using baseline.")
         cls_val = int(unique_classes[0])
-        oof_probs[:, cls_val] = 1.0
-        oof_preds_cls[:] = cls_val
-        oof_preds_reg[:] = float(np.mean(y_reg))
+        # Always return (N, 3) shaped array to avoid downstream IndexError
+        baseline_probs = np.zeros((len(X), 3), dtype=np.float32)
+        baseline_probs[:, cls_val] = 1.0
+        baseline_cls = np.full(len(X), cls_val, dtype=np.int64)
+        baseline_reg = np.full(len(X), float(np.mean(y_reg)), dtype=np.float32)
         return {
-            "oof_probs": oof_probs,
-            "oof_preds_cls": oof_preds_cls,
-            "oof_preds_reg": oof_preds_reg,
-            "scaler": scaler,
+            "oof_probs":      baseline_probs,
+            "oof_preds_cls":  baseline_cls,
+            "oof_preds_reg":  baseline_reg,
+            "scaler":         scaler,
             "fold_histories": fold_histories
         }
 

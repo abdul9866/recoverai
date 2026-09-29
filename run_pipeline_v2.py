@@ -3,6 +3,9 @@
 RecoverAI v2.0 – Master Pipeline
 Full stack: Docker-compatible · SQLite/PostgreSQL · PyTorch MLP · ChromaDB · Git-tracked
 """
+# Suppress utcnow deprecation warning from SQLAlchemy internals on Python 3.12+
+import warnings
+warnings.filterwarnings("ignore", category=DeprecationWarning)
 
 import os
 import sys
@@ -482,6 +485,13 @@ oof_r_nn   = nn_result["oof_preds_reg"]
 nn_metrics = compute_metrics(y_cls, y_reg, oof_probs, oof_c_nn, oof_r_nn)
 nn_metrics.update({"frr": 0.0, "precision_at_1": 0.0, "precision_at_3": 0.0})
 db.save_ml_metrics(RUN_ID, "pytorch_nn", nn_metrics)
+
+# ── Pad oof_probs to always be (N, 3) even with single class ──────────────────
+if oof_probs.shape[1] < 3:
+    padded = np.zeros((len(oof_probs), 3), dtype=np.float32)
+    for ci in unique_classes:
+        padded[:, int(ci)] = oof_probs[:, 0] if oof_probs.shape[1] == 1 else oof_probs[:, ci]
+    oof_probs = padded
 
 # ── Attach predictions to verdicts df ─────────────────────────────────────────
 df_verdicts["p_none"]    = oof_probs[:, 0]
