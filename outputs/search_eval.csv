@@ -1,0 +1,9 @@
+query,expected,precision_at_1,precision_at_3
+recipe for Italian pasta carbonara,cooking_recipe.txt,1.0,1.0
+UEFA Champions League football match,football_report.txt,1.0,1.0
+corporate tax invoice VAT payment,tax_invoice.pdf,1.0,1.0
+Python data structures algorithm,python_tutorial.txt,1.0,1.0
+James Webb telescope exoplanet,astronomy_article.txt,1.0,1.0
+penetration testing cybersecurity,cybersecurity_guide.txt,1.0,1.0
+machine learning gradient boosting XGBoost,ml_research_notes.txt,1.0,1.0
+Japan travel itinerary Tokyo Kyoto,travel_itinerary.docx,1.0,1.0

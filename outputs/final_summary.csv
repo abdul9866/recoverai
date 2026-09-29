@@ -1,0 +1,24 @@
+,Value
+Run ID,run_v21_20260929_175620
+Dataset Size,1260
+Real Samples,360
+Augmented Samples,900
+Class NOT_RETRIEVED,1035
+Class PARTIAL,104
+Class FULL,121
+XGBoost Accuracy,0.8159
+XGBoost F1 (weighted),0.7904
+XGBoost AUC-ROC,0.8193
+PyTorch MLP Accuracy,0.8206
+PyTorch MLP F1 (weighted),0.775
+PyTorch MLP AUC-ROC,0.836
+PyTorch MLP MAE,0.1739
+PyTorch MLP R2,0.2786
+Ensemble Accuracy,0.827
+Ensemble F1 (weighted),0.7915
+Ensemble AUC-ROC,0.8371
+Mean Fold Accuracy,0.8206
+Std Fold Accuracy,0.0095
+Knapsack FRR (%),15.18
+Search P@1,1.0
+Search P@3,1.0
