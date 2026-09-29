@@ -1,0 +1,77 @@
+version: "3.9"
+
+services:
+  # ── Main RecoverAI pipeline runner ───────────────────────────
+  recoverai:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: recoverai_pipeline
+    privileged: true                    # Required for loop-mount operations
+    volumes:
+      - ./outputs:/app/outputs          # Persist CSV/PNG outputs
+      - ./db:/app/db                    # Persist SQLite database
+      - ./chroma_data:/app/chroma_data  # Persist ChromaDB vector store
+      - /dev:/dev                       # Pass through device nodes for loop-mount
+    environment:
+      - PYTHONPATH=/app
+      - DB_PATH=/app/db/recoverai.db
+      - CHROMA_PERSIST_DIR=/app/chroma_data
+      - OUTPUTS_DIR=/app/outputs
+    command: python3 run_pipeline_v2.py
+    restart: "no"
+    networks:
+      - recoverai_net
+
+  # ── Jupyter Lab for interactive notebook viewing ──────────────
+  jupyter:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: recoverai_jupyter
+    privileged: true
+    ports:
+      - "8888:8888"
+    volumes:
+      - .:/app
+      - ./outputs:/app/outputs
+      - ./db:/app/db
+      - ./chroma_data:/app/chroma_data
+    environment:
+      - PYTHONPATH=/app
+      - DB_PATH=/app/db/recoverai.db
+      - CHROMA_PERSIST_DIR=/app/chroma_data
+    command: >
+      jupyter lab
+        --ip=0.0.0.0
+        --port=8888
+        --no-browser
+        --allow-root
+        --NotebookApp.token=recoverai2026
+        --NotebookApp.password=''
+    networks:
+      - recoverai_net
+
+  # ── PostgreSQL (optional upgrade from SQLite) ─────────────────
+  postgres:
+    image: postgres:15-alpine
+    container_name: recoverai_postgres
+    environment:
+      POSTGRES_DB: recoverai
+      POSTGRES_USER: recoverai_user
+      POSTGRES_PASSWORD: recoverai_pass
+    ports:
+      - "5432:5432"
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+    networks:
+      - recoverai_net
+    profiles:
+      - postgres                        # Only started with: docker-compose --profile postgres up
+
+volumes:
+  pg_data:
+
+networks:
+  recoverai_net:
+    driver: bridge
