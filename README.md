@@ -444,10 +444,26 @@ python3 semantic_search/search_cli.py \
 
 ## 📚 Reference Papers
 
-1. **Garfinkel, S. L.** et al. — *Bringing Science to Digital Forensics with Standardized Forensic Corpora*, Digital Investigation, vol. 6, 2010.
-2. **Beebe, N. L. & Clark, J. G.** — *Digital Forensic Text String Searching*, Digital Investigation, vol. 4, 2007.
-3. **Poisel, R. & Tjoa, S.** — *Forensics Analysis of Fragmented File Reconstruction*, IEEE SECURWARE, 2011.
-4. **Karresand, M. & Shahmehri, N.** — *File Type Identification of Data Fragments by Their Binary Structure*, IEEE IAS, 2006.
+RecoverAI builds upon and benchmarks against foundational and state-of-the-art literature in digital forensics, file carving, SSD flash persistence, and semantic information retrieval:
+
+### 🔬 Foundational File Carving & Fragment Identification
+1. **Garfinkel, S. L.** (2007) — *Carving Contiguous and Fragmented Files with Fast Object Validation*, Proceedings of the 7th Annual Digital Forensics Research Workshop (DFRWS), *Digital Investigation*, vol. 4, pp. S2–S12. [DOI: 10.1016/j.diin.2007.06.017](https://doi.org/10.1016/j.diin.2007.06.017)
+2. **Karresand, M. & Shahmehri, N.** (2006) — *File Type Identification of Data Fragments by Their Binary Structure*, Proceedings of the IEEE Information Assurance Workshop (IAW), pp. 140–147. [DOI: 10.1109/IAW.2006.1652088](https://doi.org/10.1109/IAW.2006.1652088)
+3. **Beebe, N. L. & Clark, J. G.** (2005) — *A Hierarchical, Objectives-Based Framework for the Digital Investigations Process*, *Digital Investigation*, vol. 2, no. 2, pp. 147–167. [DOI: 10.1016/j.diin.2005.04.002](https://doi.org/10.1016/j.diin.2005.04.002)
+4. **Poisel, R. & Tjoa, S.** (2013) — *Classification of Carved and Recovered Digital Evidence*, Proceedings of the Seventh International Conference on Emerging Security Information, Systems and Technologies (SECURWARE), pp. 14–20.
+
+### 💾 Modern Storage, Solid-State Media (SSD) & Flash Filesystems
+5. **King, C. & Vidas, T.** (2011) — *Empirical Analysis of Solid State Disk Data Retention when used with Contemporary Operating Systems*, *Digital Investigation*, vol. 8, pp. S111–S117. [DOI: 10.1016/j.diin.2011.05.013](https://doi.org/10.1016/j.diin.2011.05.013)
+6. **Oh, J. & Hwang, H.** (2025) — *Advanced Forensic Recovery of Deleted File Data in F2FS*, *Forensic Science International: Digital Investigation*, vol. 52, p. 301820. [DOI: 10.1016/j.fsidi.2025.301820](https://doi.org/10.1016/j.fsidi.2025.301820)
+
+### 🧠 Semantic Analysis, Vector Retrieval & AI in Forensics
+7. **Amato, F., Castiglione, A., Cozzolino, G. & Narducci, F.** (2020) — *A Semantic-Based Methodology for Digital Forensics Analysis*, *Journal of Parallel and Distributed Computing*, vol. 138, pp. 172–177. [DOI: 10.1016/j.jpdc.2019.12.016](https://doi.org/10.1016/j.jpdc.2019.12.016)
+8. **Yin, Z., Wang, Z., Xu, W., Zhuang, J., Mozumder, P., Smith, A. & Zhang, W.** (2025) — *Digital Forensics in the Age of Large Language Models*, *arXiv preprint arXiv:2504.02963*. [arXiv:2504.02963](https://arxiv.org/abs/2504.02963)
+
+### 📊 Contemporary Benchmarks & Modern Recovery Algorithms
+9. **Wickramasekara, A., Mihiranga, T., Withanage, A., Weerasinghe, B., Breitinger, F., Sheppard, J. & Scanlon, M.** (2026) — *AutoDFBench 1.0: An Automated Digital Forensics Benchmark*, *Forensic Science International: Digital Investigation*, vol. 56, p. 302055. [DOI: 10.1016/j.fsidi.2026.302055](https://doi.org/10.1016/j.fsidi.2026.302055)
+10. **Yermolov, S.** (2025) — *Modern Algorithms for Recovering Deleted Data in User and Enterprise Systems*, *International Journal of Engineering and Computer Science*, vol. 14, no. 9, pp. 27673–27679. [DOI: 10.18535/ijecs.v14i09.5234](https://doi.org/10.18535/ijecs.v14i09.5234)
+11. **Naveen, R., V, M., A, K. P. & N, S. S.** (2025) — *Recovery of Deleted Files: Challenges and Techniques*, *International Journal for Multidisciplinary Research*, vol. 7, no. 2, p. 41088. [DOI: 10.36948/ijfmr.2025.v07i02.41088](https://doi.org/10.36948/ijfmr.2025.v07i02.41088)
 
 ---
 
