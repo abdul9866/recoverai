@@ -18,7 +18,7 @@ services:
       - DB_PATH=/app/db/recoverai.db
       - CHROMA_PERSIST_DIR=/app/chroma_data
       - OUTPUTS_DIR=/app/outputs
-    command: python3 run_pipeline_v2.py
+    command: python3 run_pipeline.py
     restart: "no"
     networks:
       - recoverai_net

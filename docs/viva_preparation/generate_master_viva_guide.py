@@ -803,11 +803,11 @@ def build_master_pdf(output_path):
 if __name__ == "__main__":
     out_dir = Path(r"C:\Users\ABDUL RAHAMTULLA\.gemini\antigravity\scratch\recoverai\docs\viva_preparation")
     out_dir.mkdir(parents=True, exist_ok=True)
-    out_pdf = out_dir / "RecoverAI_Complete_Project_Master_Viva_Guide.pdf"
+    out_pdf = out_dir / "RecoverAI_Complete_Project_Guide.pdf"
     build_master_pdf(out_pdf)
 
     # Also copy to Artifact Directory
     artifact_dir = Path(r"C:\Users\ABDUL RAHAMTULLA\.gemini\antigravity\brain\eb303b62-6b4d-48f2-9c16-8f4fb812caa4")
-    artifact_pdf = artifact_dir / "RecoverAI_Complete_Project_Master_Viva_Guide.pdf"
+    artifact_pdf = artifact_dir / "RecoverAI_Complete_Project_Guide.pdf"
     shutil.copy2(out_pdf, artifact_pdf)
     print(f"Copied to Artifact Directory at: {artifact_pdf}")

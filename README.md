@@ -189,11 +189,14 @@ All numbers below are from **actual code execution** — no fabricated values.
 ```
 recoverai/
 │
-├── run_pipeline_v21.py          # ✅ Main pipeline — run this
-├── run_pipeline_v2.py           # v2.0 pipeline (original)
+├── run_pipeline.py              # ✅ Main pipeline — run this
 ├── pytorch_predictor.py         # PyTorch MLP (multi-task classifier + regressor)
 ├── db_layer.py                  # SQLAlchemy ORM — 7 tables
-├── RecoverAI_Final_Notebook.ipynb  # 32-cell Jupyter notebook with real outputs
+├── RecoverAI_Pipeline.ipynb     # 32-cell Jupyter notebook with real outputs
+│
+├── experiments/                 # Archived baseline & hyperopt experiment pipelines
+│   ├── pipeline_v2_baseline.py  # v2.0 baseline pipeline
+│   └── pipeline_v23_hyperopt.py # v2.3 hyperparameter optimization pipeline
 │
 ├── predictor/
 │   ├── model.py                 # RecoverabilityNet architecture
@@ -266,15 +269,15 @@ pip install -r requirements.txt
 
 # Run the full pipeline (requires root for loop-mount)
 sudo PYTHONPATH=$HOME/.local/lib/python3.11/site-packages \
-     python3 run_pipeline_v21.py
+     python3 run_pipeline.py
 
 # Open the notebook
-jupyter notebook RecoverAI_Final_Notebook.ipynb
+jupyter notebook RecoverAI_Pipeline.ipynb
 ```
 
 ### Option 3 — Google Colab
 
-Open [`RecoverAI_Final_Notebook.ipynb`](RecoverAI_Final_Notebook.ipynb) directly in Colab — all cells have real pre-executed outputs visible without re-running.
+Open [`RecoverAI_Pipeline.ipynb`](RecoverAI_Pipeline.ipynb) directly in Colab — all cells have real pre-executed outputs visible without re-running.
 
 ---
 

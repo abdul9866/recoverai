@@ -49,6 +49,11 @@ desktop.ini
 *.swp
 *.swo
 
+# ── Testing artifacts ─────────────────────────────────────────
+.pytest_cache/
+.coverage
+htmlcov/
+
 # ── Logs ─────────────────────────────────────────────────────
 *.log
 logs/

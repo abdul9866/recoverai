@@ -97,7 +97,7 @@ def build_pdf():
     story.append(Spacer(1, 4))
     story.append(Paragraph("Chapter 3: Codebase Ownership & Key Functions", st['h1']))
     story.append(Paragraph("• <code>pytorch_predictor.py</code>: Implements <code>RecoverabilityNet</code>, 5-fold stratified training loop, EarlyStopping on validation loss, and model checkpointing.<br/>"
-                           "• <code>run_pipeline_v23.py</code>: Master pipeline orchestrating feature engineering, ensemble blending, out-of-fold metric evaluation, and knapsack allocation execution.<br/>"
+                           "• <code>run_pipeline.py</code>: Master pipeline orchestrating feature engineering, ensemble blending, out-of-fold metric evaluation, and knapsack allocation execution.<br/>"
                            "• <code>recovery_engine/orchestrator.py</code>: Implements <code>rank_allocations()</code> and <code>allocate_within_budget()</code> enforcing the 0.50 s triage envelope.<br/>"
                            "• <code>predictor/train.py</code>: Trains the XGBoost baseline and exports feature importances showing post-deletion filler volume (>35% split gain) and occupancy (>20% split gain) as dominant drivers.", st['body']))
 
@@ -178,7 +178,7 @@ def build_pdf():
                            "• <b>Knapsack Budget:</b> B = 0.50 s | <b>Allocations:</b> 843 skips, 53 scoped carves, 364 full carves | <b>FRR:</b> 15.18%<br/>"
                            "• <b>Loss Formula:</b> L_total = 0.70 * CrossEntropy + 0.30 * MSE<br/>"
                            "• <b>Trunk Architecture:</b> Linear(7,128)->BN->ReLU->Drop(0.25)->Linear(128,64)->BN->ReLU->Drop(0.20)->Linear(64,32)->BN->ReLU->Drop(0.15)<br/>"
-                           "• <b>Key Code:</b> <code>pytorch_predictor.py</code>, <code>run_pipeline_v23.py</code>, <code>recovery_engine/orchestrator.py</code>", st['callout']))
+                           "• <b>Key Code:</b> <code>pytorch_predictor.py</code>, <code>run_pipeline.py</code>, <code>recovery_engine/orchestrator.py</code>", st['callout']))
 
     doc.build(story, canvasmaker=NumberedCanvas)
     print(f"Successfully generated {OUTPUT_PDF}")

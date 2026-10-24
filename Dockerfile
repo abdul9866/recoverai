@@ -61,4 +61,4 @@ RUN mkdir -p /app/outputs /app/db /tmp/recoverai_experiment
 
 # ── Entry point ───────────────────────────────────────────────
 EXPOSE 8888
-CMD ["python3", "run_pipeline_v2.py"]
+CMD ["python3", "run_pipeline.py"]
