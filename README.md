@@ -452,51 +452,65 @@ python3 semantic_search/search_cli.py \
 
 <table align="center">
   <tr>
-    <td align="center" width="200">
+    <td align="center" width="180">
       <a href="https://github.com/abdul9866">
-        <img src="https://avatars.githubusercontent.com/u/abdul9866?v=4" width="80" height="80"
-             style="border-radius:50%;" alt="Abdul Rahamtulla"
-             onerror="this.src='https://github.com/identicons/abdul9866.png'"/>
+        <img src="https://github.com/abdul9866.png" width="80" height="80"
+             style="border-radius:50%;" alt="Abdul Rahamtulla"/>
         <br/>
         <b>Abdul Rahamtulla</b>
       </a>
       <br/>
-      <sub>Team Lead & ML Engineer</sub>
+      <sub><b>Adversarial Verification</b></sub>
       <br/>
-      <sub>Pipeline · PyTorch MLP · Ensemble</sub>
+      <sub>Pipeline · PyTorch MLP · Knapsack</sub>
       <br/>
       <a href="https://github.com/abdul9866">
         <img src="https://img.shields.io/badge/GitHub-abdul9866-181717?logo=github" alt="GitHub"/>
       </a>
     </td>
-    <td align="center" width="200">
+    <td align="center" width="180">
       <a href="https://github.com/Asminshaik25">
-        <img src="https://avatars.githubusercontent.com/Asminshaik25?v=4" width="80" height="80"
-             style="border-radius:50%;" alt="Asmin Shaik"
-             onerror="this.src='https://github.com/identicons/Asminshaik25.png'"/>
+        <img src="https://github.com/Asminshaik25.png" width="80" height="80"
+             style="border-radius:50%;" alt="Asmin Shaik"/>
         <br/>
         <b>Asmin Shaik</b>
       </a>
       <br/>
-      <sub>Recovery Engine Engineer</sub>
+      <sub><b>Research & Threat Model</b></sub>
       <br/>
-      <sub>xCarver · Filesystem Forensics</sub>
+      <sub>Grid Matrix · xCarver v4 · Threats</sub>
       <br/>
       <a href="https://github.com/Asminshaik25">
         <img src="https://img.shields.io/badge/GitHub-Asminshaik25-181717?logo=github" alt="GitHub"/>
       </a>
     </td>
-    <td align="center" width="200">
+    <td align="center" width="180">
+      <a href="https://github.com/P-SHASHWATH">
+        <img src="https://github.com/P-SHASHWATH.png" width="80" height="80"
+             style="border-radius:50%;" alt="Polusani Shashwath"/>
+        <br/>
+        <b>Polusani Shashwath</b>
+      </a>
+      <br/>
+      <sub><b>Dependency & Recovery Surface</b></sub>
+      <br/>
+      <sub>Docker · SQLite ORM · Testing & QA</sub>
+      <br/>
+      <a href="https://github.com/P-SHASHWATH">
+        <img src="https://img.shields.io/badge/GitHub-P--SHASHWATH-181717?logo=github" alt="GitHub"/>
+      </a>
+    </td>
+    <td align="center" width="180">
       <a href="https://github.com/koduruvenkatachandrika2006-cell">
-        <img src="https://avatars.githubusercontent.com/u/230621029?v=4" width="80" height="80"
+        <img src="https://github.com/koduruvenkatachandrika2006-cell.png" width="80" height="80"
              style="border-radius:50%;" alt="Koduru Venkata Chandrika"/>
         <br/>
         <b>Koduru Venkata Chandrika</b>
       </a>
       <br/>
-      <sub>Semantic Search Engineer</sub>
+      <sub><b>Evaluation & Reporting</b></sub>
       <br/>
-      <sub>ChromaDB · Embeddings · Search</sub>
+      <sub>ChromaDB · Fused Search · Reports</sub>
       <br/>
       <a href="https://github.com/koduruvenkatachandrika2006-cell">
         <img src="https://img.shields.io/badge/GitHub-koduruvenkatachandrika-181717?logo=github" alt="GitHub"/>
@@ -507,14 +521,16 @@ python3 semantic_search/search_cli.py \
 
 <div align="center">
 
-**Institution:** [Your University Name]  
-**Department:** Computer Science & Engineering  
+**Institution:** VIT AP UNIVERSITY  
+**Department:** School of Computer Science and Engineering (SCOPE)  
 **Academic Year:** 2025–2026  
-**Project Type:** Capstone / Conference Research Paper
+**Project Type:** Major Project / Conference Research Paper  
+**Faculty Guide:** Dr. Subhani Shaik  
 
 </div>
 
 ---
+
 
 ## 📄 License
 
