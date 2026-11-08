@@ -189,57 +189,73 @@ All numbers below are from **actual code execution** — no fabricated values.
 ```
 recoverai/
 │
-├── run_pipeline.py              # ✅ Main pipeline — run this
-├── pytorch_predictor.py         # PyTorch MLP (multi-task classifier + regressor)
-├── db_layer.py                  # SQLAlchemy ORM — 7 tables
-├── RecoverAI_Pipeline.ipynb     # 32-cell Jupyter notebook with real outputs
+├── run_pipeline.py              # Main training & evaluation benchmark runner
+├── pytorch_predictor.py         # PyTorch Deep MLP multi-task classifier & regressor
+├── db_layer.py                  # SQLAlchemy SQLite metadata persistence layer
 │
-├── experiments/                 # Archived baseline & hyperopt experiment pipelines
-│   ├── pipeline_v2_baseline.py  # v2.0 baseline pipeline
-│   └── pipeline_v23_hyperopt.py # v2.3 hyperparameter optimization pipeline
+├── common/                      # Shared configuration & Pydantic schemas
+│   ├── config.py                # Hyperparameters, paths & thresholds
+│   └── schema.py                # DeletedFileRecord, Medium, Filesystem schemas
 │
-├── predictor/
-│   ├── model.py                 # RecoverabilityNet architecture
-│   ├── train.py                 # Training loop
-│   ├── predict.py               # Inference
-│   └── features.py              # Feature engineering
+├── predictor/                   # [STAGE 1] Machine Learning Recoverability Predictor
+│   ├── features.py              # 18-dimensional forensic feature vector extraction
+│   ├── model.py                 # CaseAdaptiveModel & ensemble classifier
+│   ├── train.py                 # Training routine with Class-Balanced Focal Loss
+│   ├── predict.py               # Standalone inference endpoint
+│   ├── model.joblib             # Serialized production ensemble weights (34.8 MB)
+│   └── dataset/                 # Dataset generation & ground-truth data
+│       ├── conditions.py        # Corruption & storage condition matrices
+│       ├── generate_deletions.py# Synthetic disk image & deletion simulator
+│       ├── data/                # recoverability_dataset.csv (N=1,260 samples)
+│       └── fixtures/            # Test payloads (sample_1.jpg ... sample_5.db)
 │
-├── recovery_engine/
-│   ├── orchestrator.py          # Coordinates xCarver calls
-│   ├── strategies.py            # skip / header_check / scoped / full
-│   └── f2fs_extension.py        # F2FS-specific hooks
+├── recovery_engine/             # [STAGE 2] F2FS Forensic Recovery Engine & CARP
+│   ├── orchestrator.py          # CARP 0/1 Greedy Knapsack budget scheduler
+│   ├── f2fs_extension.py        # 4KB node carving, Virtual NAT & dentry traversal
+│   └── strategies.py            # Allocation strategies (CARP vs. sequential baselines)
 │
-├── semantic_search/
-│   ├── embed.py                 # SentenceTransformer embedding
-│   ├── index.py                 # ChromaDB indexing
-│   ├── search_cli.py            # CLI search interface
-│   └── extract.py               # Text extraction (PDF/DOCX/TXT)
+├── semantic_search/             # [STAGE 3] Forensic Semantic Vector Retrieval
+│   ├── embed.py                 # Sentence-Transformers all-MiniLM-L6-v2 (384-dim)
+│   ├── extract.py               # Multi-format text parsing & local Tesseract OCR
+│   ├── index.py                 # ChromaDB HNSW vector index & fused ranking
+│   ├── search_cli.py            # Natural-language investigator CLI
+│   └── chroma_db/               # Persistent local vector collection & sqlite index
 │
-├── evaluation/
-│   ├── metrics.py               # Accuracy / F1 / AUC / MAE / R²
-│   ├── baseline.py              # Reference paper baselines
-│   └── dashboard.py             # Results visualisation
+├── evaluation/                  # Performance Benchmarks & Dashboards
+│   ├── metrics.py               # FRR, Precision@k, Recall, Macro AUC-ROC, SHA-256
+│   ├── baseline.py              # Conventional carving baseline algorithms
+│   └── dashboard.py             # Triage performance & metric visualization
 │
-├── outputs/                     # All generated results
-│   ├── RecoverAI_Results_Section.pdf   # Conference paper results
-│   ├── confusion_matrices_all.png
-│   ├── model_comparison.png
-│   ├── roc_curves.png
-│   ├── feature_importance.png
-│   ├── calibration_pytorch.png
-│   ├── reference_paper_comparison.png
-│   ├── verdict_distribution.png
-│   ├── verdicts_combined.csv    # 1,260 verdict records
-│   ├── predictions.csv          # ML predictions per sample
-│   └── final_summary.csv        # All metrics in one file
+├── tests/                       # Automated Test Suite (7/7 Passing)
+│   ├── test_integration.py      # Full end-to-end recovery & search lifecycle
+│   ├── test_orchestrator.py     # CARP Knapsack budget constraint verification
+│   ├── test_predictor.py        # Feature extraction & confidence calibration
+│   └── test_semantic.py         # Text extraction, vector indexing & search
 │
-├── Dockerfile                   # Ubuntu 22.04 + full ML stack
-├── docker-compose.yml           # 3 services: pipeline / jupyter / postgres
+├── test_corpus/                 # Test evidence fixtures (txt, csv, pdf, md, jpg)
+│
+├── vendor/xcarver/              # Low-level carving engine kernel
+│   ├── carver.py                # Physical block parsing engine
+│   ├── fs_parser.py             # Filesystem superblock & descriptor parser
+│   ├── scanner.c                # Optimized C pattern scanner
+│   ├── signatures.py            # 50+ forensic file signature definitions
+│   └── requirements.txt         # Kernel dependency constraints
+│
+├── docs/                        # Architecture Documentation & Visual Assets
+│   ├── ARCHITECTURE.md          # Complete system architecture & dataflow guide
+│   ├── generate_figures.py      # Architecture diagram generator script
+│   └── figures/                 # Benchmark charts (confusion matrix, ROC, etc.)
+│
+├── outputs/                     # Runtime output & verdict destination (.gitkeep)
+│   ├── allocations.csv          # Knapsack budget allocation outputs
+│   ├── verdicts_combined.csv    # 1,260 SHA-256 verified ground-truth records
+│   └── predictions.csv          # ML predictions per sample
+│
+├── Dockerfile                   # Ubuntu 22.04 container configuration
+├── docker-compose.yml           # Multi-container composition
 ├── requirements.txt             # Pinned Python dependencies
-└── README.md                    # This file
-```
-
----
+└── README.md                    # Project documentation
+`---
 
 ## 🚀 Quick Start
 
@@ -258,26 +274,28 @@ docker-compose up --build jupyter
 # Then open: http://localhost:8888  (token: recoverai2026)
 ```
 
-### Option 2 — WSL2 / Ubuntu (Direct)
+### Option 2 — Native / WSL2 / Ubuntu (Direct Execution)
 
 ```bash
-# Install system dependencies
-sudo apt-get install -y e2fsprogs dosfstools util-linux git
-
-# Install Python dependencies
+# Install dependencies
 pip install -r requirements.txt
 
-# Run the full pipeline (requires root for loop-mount)
-sudo PYTHONPATH=$HOME/.local/lib/python3.11/site-packages \
-     python3 run_pipeline.py
+# Run the automated test suite (all 7 unit and integration tests)
+python -m pytest tests/
 
-# Open the notebook
-jupyter notebook RecoverAI_Pipeline.ipynb
+# Run the full end-to-end training and recovery benchmark pipeline
+python run_pipeline.py
+
+# Query the semantic search assistant directly from CLI
+python semantic_search/search_cli.py --query "bank transfers and offshore accounts"
 ```
 
-### Option 3 — Google Colab
+### Option 3 — Docker Compose Deployment
 
-Open [`RecoverAI_Pipeline.ipynb`](RecoverAI_Pipeline.ipynb) directly in Colab — all cells have real pre-executed outputs visible without re-running.
+```bash
+# Run the complete pipeline inside an isolated container
+docker-compose up --build recoverai
+```
 
 ---
 
@@ -471,39 +489,7 @@ RecoverAI builds upon and benchmarks against foundational and state-of-the-art l
 
 <table align="center">
   <tr>
-    <td align="center" width="180">
-      <a href="https://github.com/abdul9866">
-        <img src="https://github.com/abdul9866.png" width="80" height="80"
-             style="border-radius:50%;" alt="Abdul Rahamtulla"/>
-        <br/>
-        <b>Abdul Rahamtulla</b>
-      </a>
-      <br/>
-      <sub><b>Adversarial Verification</b></sub>
-      <br/>
-      <sub>Pipeline · PyTorch MLP · Knapsack</sub>
-      <br/>
-      <a href="https://github.com/abdul9866">
-        <img src="https://img.shields.io/badge/GitHub-abdul9866-181717?logo=github" alt="GitHub"/>
-      </a>
-    </td>
-    <td align="center" width="180">
-      <a href="https://github.com/Asminshaik25">
-        <img src="https://github.com/Asminshaik25.png" width="80" height="80"
-             style="border-radius:50%;" alt="Asmin Shaik"/>
-        <br/>
-        <b>Asmin Shaik</b>
-      </a>
-      <br/>
-      <sub><b>Research & Threat Model</b></sub>
-      <br/>
-      <sub>Grid Matrix · xCarver v4 · Threats</sub>
-      <br/>
-      <a href="https://github.com/Asminshaik25">
-        <img src="https://img.shields.io/badge/GitHub-Asminshaik25-181717?logo=github" alt="GitHub"/>
-      </a>
-    </td>
-    <td align="center" width="180">
+    <td align="center" width="200">
       <a href="https://github.com/P-SHASHWATH">
         <img src="https://github.com/P-SHASHWATH.png" width="80" height="80"
              style="border-radius:50%;" alt="Polusani Shashwath"/>
@@ -511,15 +497,17 @@ RecoverAI builds upon and benchmarks against foundational and state-of-the-art l
         <b>Polusani Shashwath</b>
       </a>
       <br/>
-      <sub><b>Dependency & Recovery Surface</b></sub>
+      <sub><b>Reg No: 23BCE8761</b></sub>
       <br/>
-      <sub>Docker · SQLite ORM · Testing & QA</sub>
+      <sub><b>Stage 2: Recovery Engine</b></sub>
+      <br/>
+      <sub>Node Carving • Virtual NAT • Dentries</sub>
       <br/>
       <a href="https://github.com/P-SHASHWATH">
         <img src="https://img.shields.io/badge/GitHub-P--SHASHWATH-181717?logo=github" alt="GitHub"/>
       </a>
     </td>
-    <td align="center" width="180">
+    <td align="center" width="200">
       <a href="https://github.com/koduruvenkatachandrika2006-cell">
         <img src="https://github.com/koduruvenkatachandrika2006-cell.png" width="80" height="80"
              style="border-radius:50%;" alt="Koduru Venkata Chandrika"/>
@@ -527,12 +515,50 @@ RecoverAI builds upon and benchmarks against foundational and state-of-the-art l
         <b>Koduru Venkata Chandrika</b>
       </a>
       <br/>
-      <sub><b>Evaluation & Reporting</b></sub>
+      <sub><b>Reg No: 23BCE20203</b></sub>
       <br/>
-      <sub>ChromaDB · Fused Search · Reports</sub>
+      <sub><b>Stage 1: ML Predictor</b></sub>
+      <br/>
+      <sub>18 Features • Focal Loss • Ensemble</sub>
       <br/>
       <a href="https://github.com/koduruvenkatachandrika2006-cell">
         <img src="https://img.shields.io/badge/GitHub-koduruvenkatachandrika-181717?logo=github" alt="GitHub"/>
+      </a>
+    </td>
+    <td align="center" width="200">
+      <a href="https://github.com/abdul9866">
+        <img src="https://github.com/abdul9866.png" width="80" height="80"
+             style="border-radius:50%;" alt="Shaik Abdul Rahamtulla"/>
+        <br/>
+        <b>Shaik Abdul Rahamtulla</b>
+      </a>
+      <br/>
+      <sub><b>Reg No: 23BCE9465</b></sub>
+      <br/>
+      <sub><b>CARP Knapsack & Search</b></sub>
+      <br/>
+      <sub>Triage Knapsack • ChromaDB • SHA-256</sub>
+      <br/>
+      <a href="https://github.com/abdul9866">
+        <img src="https://img.shields.io/badge/GitHub-abdul9866-181717?logo=github" alt="GitHub"/>
+      </a>
+    </td>
+    <td align="center" width="200">
+      <a href="https://github.com/Asminshaik25">
+        <img src="https://github.com/Asminshaik25.png" width="80" height="80"
+             style="border-radius:50%;" alt="Shaik Asmin"/>
+        <br/>
+        <b>Shaik Asmin</b>
+      </a>
+      <br/>
+      <sub><b>Reg No: 23BCE9875</b></sub>
+      <br/>
+      <sub><b>Research & Threat Modeling</b></sub>
+      <br/>
+      <sub>Base Paper • F2FS Analysis • Gaps</sub>
+      <br/>
+      <a href="https://github.com/Asminshaik25">
+        <img src="https://img.shields.io/badge/GitHub-Asminshaik25-181717?logo=github" alt="GitHub"/>
       </a>
     </td>
   </tr>
@@ -540,11 +566,10 @@ RecoverAI builds upon and benchmarks against foundational and state-of-the-art l
 
 <div align="center">
 
-**Institution:** VIT AP UNIVERSITY  
-**Department:** School of Computer Science and Engineering (SCOPE)  
+**Institution:** School of Computer Science and Engineering (SCOPE), VIT-AP University  
 **Academic Year:** 2025–2026  
-**Project Type:** Major Project / Conference Research Paper  
-**Faculty Guide:** Dr. Subhani Shaik  
+**Project Type:** B.Tech CSE Core Capstone Review / Major Project  
+**Faculty Project Guide:** Dr. Subhani Shaik, Associate Professor, SCOPE  
 
 </div>
 
