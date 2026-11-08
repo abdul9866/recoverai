@@ -490,42 +490,6 @@ RecoverAI builds upon and benchmarks against foundational and state-of-the-art l
 <table align="center">
   <tr>
     <td align="center" width="200">
-      <a href="https://github.com/P-SHASHWATH">
-        <img src="https://github.com/P-SHASHWATH.png" width="80" height="80"
-             style="border-radius:50%;" alt="Polusani Shashwath"/>
-        <br/>
-        <b>Polusani Shashwath</b>
-      </a>
-      <br/>
-      <sub><b>Reg No: 23BCE8761</b></sub>
-      <br/>
-      <sub><b>Stage 2: Recovery Engine</b></sub>
-      <br/>
-      <sub>Node Carving • Virtual NAT • Dentries</sub>
-      <br/>
-      <a href="https://github.com/P-SHASHWATH">
-        <img src="https://img.shields.io/badge/GitHub-P--SHASHWATH-181717?logo=github" alt="GitHub"/>
-      </a>
-    </td>
-    <td align="center" width="200">
-      <a href="https://github.com/koduruvenkatachandrika2006-cell">
-        <img src="https://github.com/koduruvenkatachandrika2006-cell.png" width="80" height="80"
-             style="border-radius:50%;" alt="Koduru Venkata Chandrika"/>
-        <br/>
-        <b>Koduru Venkata Chandrika</b>
-      </a>
-      <br/>
-      <sub><b>Reg No: 23BCE20203</b></sub>
-      <br/>
-      <sub><b>Stage 1: ML Predictor</b></sub>
-      <br/>
-      <sub>18 Features • Focal Loss • Ensemble</sub>
-      <br/>
-      <a href="https://github.com/koduruvenkatachandrika2006-cell">
-        <img src="https://img.shields.io/badge/GitHub-koduruvenkatachandrika-181717?logo=github" alt="GitHub"/>
-      </a>
-    </td>
-    <td align="center" width="200">
       <a href="https://github.com/abdul9866">
         <img src="https://github.com/abdul9866.png" width="80" height="80"
              style="border-radius:50%;" alt="Shaik Abdul Rahamtulla"/>
@@ -559,6 +523,42 @@ RecoverAI builds upon and benchmarks against foundational and state-of-the-art l
       <br/>
       <a href="https://github.com/Asminshaik25">
         <img src="https://img.shields.io/badge/GitHub-Asminshaik25-181717?logo=github" alt="GitHub"/>
+      </a>
+    </td>
+    <td align="center" width="200">
+      <a href="https://github.com/koduruvenkatachandrika2006-cell">
+        <img src="https://github.com/koduruvenkatachandrika2006-cell.png" width="80" height="80"
+             style="border-radius:50%;" alt="Koduru Venkata Chandrika"/>
+        <br/>
+        <b>Koduru Venkata Chandrika</b>
+      </a>
+      <br/>
+      <sub><b>Reg No: 23BCE20203</b></sub>
+      <br/>
+      <sub><b>Stage 1: ML Predictor</b></sub>
+      <br/>
+      <sub>18 Features • Focal Loss • Ensemble</sub>
+      <br/>
+      <a href="https://github.com/koduruvenkatachandrika2006-cell">
+        <img src="https://img.shields.io/badge/GitHub-koduruvenkatachandrika-181717?logo=github" alt="GitHub"/>
+      </a>
+    </td>
+    <td align="center" width="200">
+      <a href="https://github.com/P-SHASHWATH">
+        <img src="https://github.com/P-SHASHWATH.png" width="80" height="80"
+             style="border-radius:50%;" alt="Polusani Shashwath"/>
+        <br/>
+        <b>Polusani Shashwath</b>
+      </a>
+      <br/>
+      <sub><b>Reg No: 23BCE8761</b></sub>
+      <br/>
+      <sub><b>Stage 2: Recovery Engine</b></sub>
+      <br/>
+      <sub>Node Carving • Virtual NAT • Dentries</sub>
+      <br/>
+      <a href="https://github.com/P-SHASHWATH">
+        <img src="https://img.shields.io/badge/GitHub-P--SHASHWATH-181717?logo=github" alt="GitHub"/>
       </a>
     </td>
   </tr>
